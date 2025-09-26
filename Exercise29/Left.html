@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Left - HTML</title>
+    </head>
+    <body style="margin:0; padding:0;">
+        <div style="text-align:center;">
+            <p>Click a region to view a report</p>
+            <img src="images/Map.jpg" usemap="#usmap" alt="US Map" style="max-width:100%; height:auto;">
+            <map name="usmap">
+                <area shape="poly" coords="80,100,120,100,120,140,80,140" href="MWChart.html" alt="Midwest" target="my_container">
+                <area shape="poly" coords="10,80,80,100,80,140,10,140" href="WChart.html" alt="West" target="my_container">
+                <area shape="poly" coords="120,100,180,80,180,140,120,140" href="NEChart.html" alt="Northeast" target="my_container">
+                <area shape="poly" coords="80,140,120,140,120,200,80,200" href="SChart.html" alt="South" target="my_container">
+            </map>
+        </div>
+    </body>
+</html>
