@@ -1,0 +1,29 @@
+#customer
+{
+    font-family: 'Times New Roman', Times, serif;
+    width:100%;
+    border-collapse: collapse;
+}
+#customer td, #customer th
+{
+    font-size: 14px;
+    border:1px solid #98bf21;
+    padding:3px 7px 2px 7px;
+}
+#customer th
+{
+    font-size:1.1em;
+    text-align: left;
+    padding-top:5px;
+    padding-bottom:4px;
+    background-color:#a7c942;
+    color:#ffffff;
+}
+#customer tr.alt td
+{
+    background-color: antiquewhite;
+}
+#customer tr:nth-child(2n)
+{
+    background-color: #e6eecd;
+}
