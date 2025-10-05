@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #a5f8f8; /* màu nền ngoài form */
+}
+
+.form-container {
+    width: 80%;
+    background-color: #b7f2f3;  /* xanh nhạt giống hình */
+    padding: 20px 25px;
+    margin: 30px auto;
+    border: 1px solid #999;
+    color: #333; /* màu chữ chính */
+}
+
+h1 {
+    color: #d43333; /* đỏ đậm như hình */
+    font-size: 26px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.section {
+    margin-top: 15px;
+    color: #333; /* chữ trong các mục */
+}
+
+.section p {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.section label {
+    display: inline-block;
+    width: 200px;
+    margin: 5px 0;
+    color: #000; /* màu chữ của label */
+}
+
+input.date-input {
+    width: 150px;
+    padding: 5px;
+    border: 1px solid #888;
+    background-color: #fff;
+    color: #000;
+}
+
+input.keyword-input {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #888;
+    background-color: #fff;
+    color: #000;
+}
+
+.buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 40px;
+    text-align: center;
+    font-size: 15px;
+    color: #000; /* màu chữ dưới icon */
+}
+
+.buttons img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 3px;
+}
