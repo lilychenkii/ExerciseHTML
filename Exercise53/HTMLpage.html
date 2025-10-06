@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Sum Result</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
+            .container {
+                width: 600px;
+                margin: 50px auto;
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                text-align: center;
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+            p {
+                font-size: 14px;
+                margin: 10px 0;
+            }
+            .label {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Sum Result</h1>
+            <p><span class="label">Quantity 1:</span> <span id="qty1"></span></p>
+            <p><span class="label">Item 1:</span> <span id="item1"></span></p>
+            <p><span class="label">Quantity 2:</span> <span id="qty2"></span></p>
+            <p><span class="label">Item 2:</span> <span id="item2"></span></p>
+            <p><span class="label">Quantity 3:</span> <span id="qty3"></span></p>
+            <p><span class="label">Item 3:</span> <span id="item3"></span></p>
+            <p><span class="label">Total:</span> <span id="total"></span></p>
+        </div>
+
+        <script>
+            // Extract data from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            document.getElementById('qty1').textContent = urlParams.get('qty1');
+            document.getElementById('item1').textContent = urlParams.get('item1');
+            document.getElementById('qty2').textContent = urlParams.get('qty2');
+            document.getElementById('item2').textContent = urlParams.get('item2');
+            document.getElementById('qty3').textContent = urlParams.get('qty3');
+            document.getElementById('item3').textContent = urlParams.get('item3');
+            document.getElementById('total').textContent = urlParams.get('total');
+        </script>
+    </body>
+</html>

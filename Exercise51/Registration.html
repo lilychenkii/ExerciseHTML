@@ -1,0 +1,116 @@
+<html>
+    <head>
+        <title>Newborn Registration - St. Mary's of Northland Pines</title>
+        <style>
+            body {
+                background-color: teal;
+                font-family: Arial, sans-serif;
+                color: white;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 600px;
+                margin: 50px auto;
+                background-color: #004d4d;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+            .header {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+            label {
+                margin: 10px 0 5px;
+            }
+            input[type="text"], input[type="date"], select {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                border: none;
+                border-radius: 5px;
+            }
+            .buttons {
+                display: flex;
+                justify-content: space-between;
+            }
+            button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button.register {
+                background-color: #007bff;
+                color: white;
+            }
+            button.cancel {
+                background-color: #dc3545;
+                color: white;
+            }
+            p{
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <p>
+                    <img src="../Exercise51/images/Logo.gif">
+                </p>
+                <h1>Newborn Registration</h1>
+            </div>
+            <form>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+
+                <label for="infant-first-name">1) Infant's first name:</label>
+                <input type="text" id="infant-first-name" name="infant-first-name">
+
+                <label for="infant-last-name">Last:</label>
+                <input type="text" id="infant-last-name" name="infant-last-name">
+
+                <label for="medical-record">2) Medical Record #:</label>
+                <input type="text" id="medical-record" name="medical-record">
+
+                <label for="dob">3) Date of birth:</label>
+                <input type="date" id="dob" name="dob">
+
+                <label for="birth-weight">4) Birth weight:</label>
+                <input type="text" id="birth-weight" name="birth-weight">
+
+                <label for="apgar-score">5) APGAR score:</label>
+                <input type="text" id="apgar-score" name="apgar-score">
+
+                <label for="mother-first-name">6) Mother's first name:</label>
+                <input type="text" id="mother-first-name" name="mother-first-name">
+
+                <label for="father-first-name">7) Father's first name:</label>
+                <input type="text" id="father-first-name" name="father-first-name">
+
+                <label for="father-last-name">Last:</label>
+                <input type="text" id="father-last-name" name="father-last-name">
+
+                <label for="physician">8) Physician (check all that apply):</label>
+                <select id="physician" name="physician" multiple>
+                    <option>Dr. Warren Albert</option>
+                    <option>Dr. Maria Alvarez</option>
+                    <option>Dr. Karen Brinkman</option>
+                    <option>Dr. Micheal Kerry</option>
+                </select>
+
+                <div class="buttons">
+                    <button type="submit" class="register">Register</button>
+                    <button type="button" class="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

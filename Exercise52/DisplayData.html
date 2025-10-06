@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Message Details</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
+            .container {
+                width: 400px;
+                margin: 50px auto;
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                text-align: center;
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+            p {
+                font-size: 14px;
+                margin: 10px 0;
+            }
+            .label {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Message Details</h1>
+            <p><span class="label">Full name:</span> <span id="full-name"></span></p>
+            <p><span class="label">Email:</span> <span id="email"></span></p>
+            <p><span class="label">Title:</span> <span id="title"></span></p>
+            <p><span class="label">Send to:</span> <span id="send-to"></span></p>
+            <p><span class="label">Content:</span> <span id="content"></span></p>
+        </div>
+
+        <script>
+            // Extract data from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            document.getElementById('full-name').textContent = urlParams.get('full-name');
+            document.getElementById('email').textContent = urlParams.get('email');
+            document.getElementById('title').textContent = urlParams.get('title');
+            document.getElementById('send-to').textContent = urlParams.get('send-to');
+            document.getElementById('content').textContent = urlParams.get('content');
+        </script>
+    </body>
+</html>

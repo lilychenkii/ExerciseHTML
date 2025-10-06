@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>Contact the Editorial Office</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
+            .container {
+                width: 400px;
+                margin: 50px auto;
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                text-align: center;
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+            input[type="text"], input[type="email"], select, textarea {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            button {
+                width: 100%;
+                padding: 10px;
+                background-color: #800000;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            button:hover {
+                background-color: #a00000;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Contact the Editorial Office</h1>
+            <form action="../Exercise52/DisplayData.html" method="GET">
+                <label for="full-name">Full name</label>
+                <input type="text" id="full-name" name="full-name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="send-to">Send to</label>
+                <select id="send-to" name="send-to" required>
+                    <option value="Editorial board">Editorial board</option>
+                    <option value="News Department">News Department</option>
+                    <option value="Board of Perspectives">Board of Perspectives</option>
+                    <option value="World Board">World Board</option>
+                    <option value="Business Department">Business Department</option>
+                </select>
+
+                <label for="content">Content</label>
+                <textarea id="content" name="content" rows="5" required></textarea>
+
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </body>
+</html>

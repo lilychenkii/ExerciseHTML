@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <title>List of Products</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
+            .container {
+                width: 600px;
+                margin: 50px auto;
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                text-align: center;
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            th, td {
+                border: 1px solid #ccc;
+                padding: 10px;
+                text-align: center;
+            }
+            th {
+                background-color: #f4f4f4;
+            }
+            input[type="text"] {
+                width: 100%;
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            .total-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .total-container input[type="text"] {
+                width: 150px;
+            }
+            button {
+                padding: 10px 20px;
+                background-color: #ffa500;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            button:hover {
+                background-color: #ff8c00;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>List of Products</h1>
+            <form action="../Exercise53/HTMLpage.html" method="GET">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Part Number</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Item table</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>C112</td>
+                            <td>Mouse</td>
+                            <td>19.95$</td>
+                            <td><input type="text" name="qty1"></td>
+                            <td><input type="text" name="item1"></td>
+                        </tr>
+                        <tr>
+                            <td>B124</td>
+                            <td>Keyboard US</td>
+                            <td>29.95$</td>
+                            <td><input type="text" name="qty2"></td>
+                            <td><input type="text" name="item2"></td>
+                        </tr>
+                        <tr>
+                            <td>U125</td>
+                            <td>USB KingMax</td>
+                            <td>39.95$</td>
+                            <td><input type="text" name="qty3"></td>
+                            <td><input type="text" name="item3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="total-container">
+                    <label for="total">Total:</label>
+                    <input type="text" id="total" name="total">
+                    <button type="submit">Sum</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
