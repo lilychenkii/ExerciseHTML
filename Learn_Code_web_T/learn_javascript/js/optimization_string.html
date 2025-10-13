@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Tiêu đề trang</title>
+    <script>
+        function processOptimization() {
+            const input = document.getElementById('name_input').value;
+            const words = input.trim().split(/\s+/);
+            const capitalized = words
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                .join(' ');
+            document.getElementById('name_output').innerText = capitalized;
+        }
+    </script>
+</head>
+<body>
+    <form name="my_form">
+        <table>
+            <tr>
+                <td>Input:</td>
+                <td>
+                    <input type="text" name="name_input" id="name_input" oninput="processOptimization()"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Output:</td>
+                <td id="name_output"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

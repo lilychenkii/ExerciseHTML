@@ -1,0 +1,90 @@
+<html>
+<head>
+    <title>W3C's String Processing Website</title>
+    <link rel="stylesheet" href="../Exercise56/stylesheet.css">
+
+    <script>
+        function enableInput() {
+            document.getElementById('inputData').disabled = false;
+            document.getElementById('inputData').focus();
+        }
+
+        function countUppercase() {
+            const input = document.getElementById('inputData').value;
+            const uppercaseCount = (input.match(/[A-Z]/g) || []).length;
+            document.getElementById('result').innerText = `Uppercase count: ${uppercaseCount}`;
+        }
+
+        function outputOneWordPerLine() {
+            const input = document.getElementById('inputData').value;
+            const words = input.split(/\s+/).filter(word => word.length > 0);
+            document.getElementById('result').innerText = words.join('\n');
+        }
+
+        function countWords() {
+            const input = document.getElementById('inputData').value;
+            const words = input.split(/\s+/).filter(word => word.length > 0).length;
+            document.getElementById('result').innerText = `Word count: ${words}`;
+        }
+
+        function countVowelsConsonants() {
+            const input = document.getElementById('inputData').value.toLowerCase();
+            const vowels = (input.match(/[aeiou]/g) || []).length;
+            const consonants = (input.match(/[bcdfghjklmnpqrstvwxyz]/g) || []).length;
+            document.getElementById('result').innerText = `Vowels: ${vowels}, Consonants: ${consonants}`;
+        }
+
+        function uppercaseDisplay() {
+            const input = document.getElementById('inputData').value;
+            document.getElementById('result').innerText = input.toUpperCase();
+        }
+
+        function lowercaseDisplay() {
+            const input = document.getElementById('inputData').value;
+            document.getElementById('result').innerText = input.toLowerCase();
+        }
+
+        function countLowercase() {
+            const input = document.getElementById('inputData').value;
+            const lowercaseCount = (input.match(/[a-z]/g) || []).length;
+            document.getElementById('result').innerText = `Lowercase count: ${lowercaseCount}`;
+        }
+
+        function openWebsite() {
+            window.open('https://www.example.com', '_blank');
+        }
+    </script>
+</head>
+<body>
+    <h2>Using String Processing functions</h2>
+    <table border="1">
+        <tr>
+            <td>Input Data:</td>
+            <td><textarea id="inputData" disabled style="width: 200px; height: 100px; resize: none;"></textarea></td>
+            <td>Result:</td>
+            <td><div id="result" style="width: 200px; height: 100px; border: 1px solid black; padding: 5px;"></div></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td><button onclick="enableInput()">Enter Data</button></td>
+            <td><button onclick="countUppercase()">Count the number of uppercase characters</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="uppercaseDisplay()">Uppercase display</button></td>
+            <td><button onclick="outputOneWordPerLine()">Output one word per line</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="lowercaseDisplay()">lowercase display</button></td>
+            <td><button onclick="countWords()">Word count</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="countLowercase()">Count the number of lowercase characters</button></td>
+            <td><button onclick="countVowelsConsonants()">print vowels, consonants</button></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button onclick="openWebsite()">Open Website</button></td>
+        </tr>
+    </table>
+</body>
+</html>
