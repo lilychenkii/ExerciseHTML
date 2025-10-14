@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Equation Solver</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+    <div class="container">
+        <h2>The quadratic equation</h2>
+        <table>
+            <tr><td>a:</td><td><input type="number" id="a"></td></tr>
+            <tr><td>b:</td><td><input type="number" id="b"></td></tr>
+            <tr><td>c:</td><td><input type="number" id="c"></td></tr>
+            <tr><td>Result:</td><td><input type="text" id="result" readonly></td></tr>
+        </table>
+        <div class="buttons">
+            <button onclick="findSolution()">Find solution</button>
+            <button onclick="clearFields()">Clear</button>
+        </div>
+    </div>
+    <script>
+        function findSolution() {
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+
+            const discriminant = b * b - 4 * a * c;
+            let result = '';
+
+            if (discriminant > 0) {
+                const x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+                const x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+                result = `x1=${x1.toFixed(2)}, x2=${x2.toFixed(2)}`;
+            } else if (discriminant === 0) {
+                const x = -b / (2 * a);
+                result = `x1=x2=${x.toFixed(2)}`;
+            } else {
+                result = "No real solutions";
+            }
+
+            document.getElementById('result').value = result;
+        }
+
+        function clearFields() {
+            document.getElementById('a').value = '';
+            document.getElementById('b').value = '';
+            document.getElementById('c').value = '';
+            document.getElementById('result').value = '';
+        }
+    </script>
+</body>
+</html>
