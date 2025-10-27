@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>Thể thao - VnExpress (RSS tự động)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --brand:#c62828; --brand2:#8e0000; --bg:#0f172a; --panel:#0b1226;
+      --card:#0b1226; --card2:#0e1830; --text:#e5e7eb; --muted:#94a3b8; --accent:#f87171;
+      --border: #1e293b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:radial-gradient(1000px 600px at 10% -10%, rgba(200,40,40,.25), transparent),
+                      radial-gradient(900px 600px at 110% 10%, rgba(142,0,0,.2), transparent),
+                      linear-gradient(180deg,#0b1226 0%, #0a0f1f 60%, #070b16 100%);
+      color:var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;}
+    /* Header */
+    header{position:sticky;top:0;z-index:20;background:linear-gradient(90deg,var(--brand),var(--brand2));
+      box-shadow:0 4px 24px rgba(0,0,0,.25);}
+    .wrap{max-width:1100px;margin:0 auto;padding:14px 16px;}
+    .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:28px;height:28px;filter:brightness(0) invert(1)}
+    .brand h1{margin:0;font-size:18px;letter-spacing:.2px}
+    .actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+    button, select, input[type="search"]{
+      background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.25);
+      padding:10px 12px; border-radius:12px; outline:none; backdrop-filter: blur(6px);
+    }
+    button{cursor:pointer}
+    button:hover{background:rgba(255,255,255,.2)}
+    .toolbar{display:flex;gap:10px;align-items:center;margin-top:8px}
+    .toolbar .grow{flex:1}
+    input[type="search"]{width:100%}
+    /* Meta */
+    .meta{color:var(--muted);font-size:13px;margin:14px 0 8px 0}
+    /* Grid */
+    main{padding:16px 0}
+    .grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+    .card{
+      background:linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
+      border:1px solid var(--border); border-radius:16px; overflow:hidden;
+      display:flex; flex-direction:column; box-shadow:0 10px 30px rgba(0,0,0,.25);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .card:hover{transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,.35); border-color:#2b3b56}
+    .thumb{position:relative; aspect-ratio:16/9; background:#0a1328}
+    .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .content{padding:14px}
+    .title{font-size:16px;line-height:1.4;margin:0 0 8px 0}
+    .title a{color:#fff;text-decoration:none}
+    .title a:hover{color:#ffe1e1;text-decoration:underline}
+    .desc{color:#cbd5e1; font-size:13px; line-height:1.6; margin:0 0 10px 0}
+    .badges{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:auto}
+    .badge{font-size:11px;color:#e2e8f0;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.35);
+      padding:4px 8px;border-radius:999px}
+    .date{color:#94a3b8; font-size:12px}
+    .empty{color:#94a3b8;text-align:center;padding:36px;border:1px dashed #24324d;border-radius:14px;background:rgba(255,255,255,.03)}
+    footer{color:#94a3b8;text-align:center;padding:26px 0;font-size:12px}
+    a.source{color:#93c5fd}
+    /* Skeleton shimmer */
+    .skeleton{animation: shimmer 1.2s infinite linear; background:linear-gradient(90deg,
+      rgba(255,255,255,.05) 0%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.05) 100%);}
+    @keyframes shimmer{0%{background-position:-300px 0}100%{background-position:300px 0}}
+    .sk-card{border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .sk-thumb{height:160px}
+    .sk-line{height:12px;margin:12px;border-radius:8px}
+    .sk-line.w60{width:60%}.sk-line.w80{width:80%}.sk-line.w40{width:40%}
+    /* Tiny tip */
+    .tip{color:#9fb3d9;font-size:12px;margin-left:8px}
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="wrap">
+      <div class="row">
+        <div class="brand">
+          <img src="https://s.vnecdn.net/vnexpress/i/v20/logos/vne_logo_rss.png" alt="VnExpress">
+          <h1>Thể thao • RSS tự động</h1>
+        </div>
+        <div class="actions">
+          <button id="refreshBtn" title="Làm mới ngay">🔄 Làm mới</button>
+          <select id="sortSelect" title="Sắp xếp">
+            <option value="newest">Mới nhất</option>
+            <option value="oldest">Cũ nhất</option>
+            <option value="az">Tiêu đề A→Z</option>
+            <option value="za">Tiêu đề Z→A</option>
+          </select>
+        </div>
+      </div>
+      <div class="toolbar">
+        <div class="grow">
+          <input id="q" type="search" placeholder="Tìm theo tiêu đề/mô tả… (ví dụ: Arsenal, Ronaldo, F1, V-League)">
+        </div>
+        <span class="tip" id="autoTip">Tự làm mới mỗi 10 phút</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="wrap">
+    <div id="meta" class="meta">Đang tải dữ liệu RSS…</div>
+    <div id="grid" class="grid" aria-live="polite"></div>
+    <div id="empty" class="empty" style="display:none">Không có bài phù hợp bộ lọc.</div>
+  </main>
+
+  <footer>
+    Nguồn: <a class="source" href="https://vnexpress.net/rss/the-thao.rss" target="_blank" rel="noopener">VnExpress - RSS Thể thao</a> • Hiển thị theo múi giờ Asia/Ho_Chi_Minh
+  </footer>
+
+<script type="text/javascript">
+(function(){
+  // ===== CẤU HÌNH =====
+  var RSS_URL = "https://vnexpress.net/rss/the-thao.rss";
+  var PROXY = "https://api.allorigins.win/get?url=" + encodeURIComponent(RSS_URL);
+  var TZ = "Asia/Ho_Chi_Minh";
+  var AUTO_INTERVAL_MS = 10 * 60 * 1000; // 10 phút
+
+  // ===== TIỆN ÍCH =====
+  function fmtDate(str){
+    var d = new Date(str);
+    if (isNaN(d)) return str;
+    return d.toLocaleString("vi-VN",{timeZone:TZ,hour12:false,
+      year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"});
+  }
+  function stripTags(html){
+    var tmp=document.createElement("div"); tmp.innerHTML=html;
+    tmp.querySelectorAll("script,style").forEach(function(n){n.remove()});
+    var t = (tmp.textContent || tmp.innerText || "").replace(/\s+/g," ").trim();
+    return t;
+  }
+  function firstImageFromHTML(html){
+    var m = /<img[^>]+src="([^"]+)"/i.exec(html||"");
+    return m ? m[1] : "";
+  }
+  function getText(node,tag){
+    var el=node.getElementsByTagName(tag)[0];
+    return el ? (el.textContent||"").trim() : "";
+  }
+  function getAttr(node,tag,attr){
+    var el=node.getElementsByTagName(tag)[0];
+    return el ? (el.getAttribute(attr)||"") : "";
+  }
+
+  // ===== DOM ELEMENTS =====
+  var grid = document.getElementById("grid");
+  var meta = document.getElementById("meta");
+  var empty = document.getElementById("empty");
+  var q = document.getElementById("q");
+  var sortSelect = document.getElementById("sortSelect");
+  var refreshBtn = document.getElementById("refreshBtn");
+
+  // ===== STATE =====
+  var rawItems = [];
+  var viewItems = [];
+  var channelTitle = "Thể thao - VnExpress RSS";
+  var channelPub = "";
+
+  // ===== UI: Skeleton khi tải =====
+  function renderSkeleton(count){
+    var s="", n=count||6;
+    for (var i=0;i<n;i++){
+      s += '<div class="sk-card"><div class="thumb sk-thumb skeleton"></div>'
+         + '<div class="sk-line w80 skeleton"></div>'
+         + '<div class="sk-line w60 skeleton"></div>'
+         + '<div class="sk-line w40 skeleton"></div></div>';
+    }
+    grid.innerHTML = s;
+  }
+
+  // ===== PARSE RSS XML =====
+  function parseItems(xmlText){
+    var doc = new DOMParser().parseFromString(xmlText,"application/xml");
+    if (doc.querySelector("parsererror")) throw new Error("parsererror");
+
+    channelTitle = getText(doc,"title") || "Thể thao - VnExpress RSS";
+    // channel > pubDate
+    var ch = doc.getElementsByTagName("channel")[0];
+    if (ch){
+      var chpd = ch.getElementsByTagName("pubDate")[0];
+      channelPub = chpd ? chpd.textContent : "";
+    }
+
+    var nodes = doc.getElementsByTagName("item");
+    var arr = [];
+    for (var i=0;i<nodes.length;i++){
+      var item = nodes[i];
+      var title = getText(item,"title");
+      var link = getText(item,"link");
+      var guid = getText(item,"guid") || link;
+      var pubDate = getText(item,"pubDate");
+      var descRaw = getText(item,"description");
+      var encUrl = getAttr(item,"enclosure","url");
+      var img = encUrl || firstImageFromHTML(descRaw) || "";
+      var desc = stripTags(descRaw).slice(0,220);
+      arr.push({title:title, link:link, guid:guid, pubDate:pubDate, imgUrl:img, descPlain:desc});
+    }
+    return arr;
+  }
+
+  // ===== RENDER =====
+  function cardHTML(it){
+    var img = it.imgUrl ? '<img src="'+it.imgUrl+'" alt="">' : '';
+    return '<article class="card">'
+        +  '<div class="thumb">'+img+'</div>'
+        +  '<div class="content">'
+        +    '<h3 class="title"><a href="'+it.link+'" target="_blank" rel="noopener">'+it.title+'</a></h3>'
+        +    '<p class="desc">'+(it.descPlain||"")+'</p>'
+        +    '<div class="badges">'
+        +      '<span class="date">🕓 '+fmtDate(it.pubDate)+'</span>'
+        +      '<span class="badge">VnExpress</span>'
+        +      '<span class="badge">RSS</span>'
+        +    '</div>'
+        +  '</div>'
+        +'</article>';
+  }
+  function renderMeta(){
+    meta.innerHTML = 'Nguồn: <b>'+channelTitle+'</b>'
+      +' • Cập nhật RSS: <b>'+fmtDate(channelPub||new Date().toUTCString())+'</b>'
+      +' • Tổng bài: <b>'+rawItems.length+'</b>';
+  }
+  function renderGrid(list){
+    if (!list.length){ grid.innerHTML=""; empty.style.display="block"; return; }
+    empty.style.display="none";
+    var html = "";
+    for (var i=0;i<list.length;i++){ html += cardHTML(list[i]); }
+    grid.innerHTML = html;
+  }
+
+  // ===== FILTER + SORT =====
+  function applyFilterSort(){
+    var kw = (q.value||"").toLowerCase().trim();
+    var sort = sortSelect.value;
+    var arr = rawItems.slice();
+
+    if (kw){
+      arr = arr.filter(function(it){
+        return (it.title||"").toLowerCase().indexOf(kw) >= 0
+            || (it.descPlain||"").toLowerCase().indexOf(kw) >= 0;
+      });
+    }
+    arr.sort(function(a,b){
+      if (sort==="newest") return new Date(b.pubDate)-new Date(a.pubDate);
+      if (sort==="oldest") return new Date(a.pubDate)-new Date(b.pubDate);
+      if (sort==="az") return a.title.localeCompare(b.title,"vi");
+      if (sort==="za") return b.title.localeCompare(a.title,"vi");
+      return 0;
+    });
+
+    viewItems = arr;
+    renderGrid(viewItems);
+  }
+
+  // ===== FETCH RSS (XHR như ví dụ của bạn) =====
+  function loadSportNews(){
+    meta.textContent = "Đang tải dữ liệu RSS…";
+    renderSkeleton(8);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", PROXY, true);
+    xhr.send();
+    xhr.onreadystatechange = function(){
+      if (xhr.readyState === 4){
+        if (xhr.status === 200){
+          try{
+            var res = JSON.parse(xhr.responseText);
+            var xml = res.contents;
+            rawItems = parseItems(xml);
+            renderMeta();
+            // reset lọc + mặc định sắp xếp mới nhất
+            sortSelect.value = "newest";
+            applyFilterSort();
+          }catch(e){
+            console.error(e);
+            meta.innerHTML = '<span style="color:#fca5a5">Lỗi phân tích RSS.</span>';
+            grid.innerHTML = "";
+            empty.style.display = "block";
+          }
+        }else{
+          meta.innerHTML = '<span style="color:#fca5a5">Không tải được RSS (mạng/CORS). Thử lại.</span>';
+          grid.innerHTML = "";
+          empty.style.display = "block";
+        }
+      }
+    };
+  }
+
+  // ===== EVENT =====
+  q.addEventListener("input", applyFilterSort);
+  sortSelect.addEventListener("change", applyFilterSort);
+  refreshBtn.addEventListener("click", loadSportNews);
+
+  // init
+  loadSportNews();
+  setInterval(loadSportNews, AUTO_INTERVAL_MS);
+})();
+</script>
+</body>
+</html>

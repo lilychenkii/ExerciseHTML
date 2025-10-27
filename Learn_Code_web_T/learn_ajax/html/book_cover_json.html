@@ -1,0 +1,116 @@
+<html>
+
+<head>
+    <title>Tiêu đề trang</title>
+    <script type="text/javascript">
+        function load_books_ajax()
+        {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET","../dataset/books_cover.json",true)
+            xhr.send()
+            xhr.onreadystatechange=function()
+            {
+                if (xhr.readyState == 4 && xhr.status == 200)
+                {
+                    var string_json=xhr.responseText
+                    var object_json=JSON.parse(string_json)
+                    //my_div.innerText=object_json.bookstore.book.length
+                    for (i=0;i<object_json.bookstore.book.length;i++)
+                    {
+                        book=object_json.bookstore.book[i]
+                        tr=document.createElement('tr')
+                        td_title=document.createElement('td')
+                        td_author=document.createElement('td')
+                        td_year=document.createElement('td')
+                        td_cover=document.createElement('td')
+                        td_action=document.createElement('td')
+
+                        td_title.innerText=book.td_title
+                        td_author.innerText=book.td_author
+                        td_year.innerText=book.td_year
+
+                        //td_cover.innerText=book.td_cover
+
+                        img_cover=document.createElement('img')
+                        img_cover.setAttribute('src','../images/'+book.cover)
+                        img_cover.setAttribute('width','50')
+                        img_cover.setAttribute('height','100')
+                        img_cover.setAttribute('style','cursor:pointer')
+                        img_cover.setAttribute('title','Click here to view detail')
+                        td_cover.appendChild(img_cover)
+                        //saving memory
+                        img_cover.selected_book=book
+
+                        img_cover.onclick=function()
+                        {
+                            selected_book=this.selected_book
+                            stirng_json=JSON.stringify(selected_book)
+                            localStorage.setItem('selected_book',string_json)
+                            window.open('book_detail.html','_self')
+                            //alert('Ban muon xem chi tiet san pham '+selected_book.title)
+                        }
+
+                        img_detail=document.createElement('img')
+                        img_detail.setAttribute('src','../images/ic_delete.png')
+                        td_action.appendChild(img_detail)
+
+                        img_edit=document.createElement('img')
+                        img_edit.setAttribute('src','../images/ic_delete.png')
+                        td_action.appendChild(img_edit)
+                        
+                        img_delete=document.createElement('img')
+                        img_delete.setAttribute('src','../images/ic_delete.png')
+                        img_delete.setAttribute('title','Click here to remove this Item')
+                        img_delete.setAttribute('style','cursor:pointer')
+                        td_action.appendChild(img_delete)
+                        img_delete.parent_row=tr
+                        img_delete.onclicke-function()
+                        {
+                            title_delete=this.parent_row.childNotes[0].innerText
+                            if (confirm('Wanna delete ['+title_delete+']?'))
+                            {
+                                book_tbody.removeChild(this.parent_row)
+                            }
+                        }
+
+
+                        tr.appendChild(td_title)
+                        tr.appendChild(td_author)
+                        tr.appendChild(td_year)
+                        tr.appendChild(td_cover)
+                        tr.appendChild(td_action)
+                        book_tbody.appendChild(tr)
+
+
+
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="my_div" style="height:150px;overflow-y: scroll; background-color: aquamarine;">
+
+    </div>
+    <table border="1">
+        <caption>List of Books</caption>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Cover</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="book_tbody">
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        load_books_ajax();
+    </script>
+</body>
+
+</html>

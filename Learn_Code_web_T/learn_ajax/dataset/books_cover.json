@@ -1,0 +1,24 @@
+{
+  "bookstore": {
+    "book": [
+      {
+        "title": "Everyday Italian",
+        "author": "Giada De Laurentiis",
+        "year": 2005,
+        "cover": "book1.png"
+      },
+      {
+        "title": "Một bữa no",
+        "author": "Nam cao",
+        "year": 1945,
+        "cover": "book2.png"
+      },
+      {
+        "title": "Đời thừa",
+        "author": "Nam cao",
+        "year": 1943,
+        "cover": "book3.png"
+      }
+    ]
+  }
+}

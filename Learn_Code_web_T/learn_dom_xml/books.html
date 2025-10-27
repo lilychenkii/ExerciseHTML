@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>Books</title>
+        <script type="text/javascript">
+            var txt='<bookstore>'
+                txt+="<book>"
+                    txt+="<title>Everyday Italian</title>"
+                    txt+="<author>Giada De Laurentiis</author>"
+                    txt+="<year>2005</year>"
+                txt+="</book>"
+                txt+="</book>"
+            ;       txt+="<title>Doi thuan</title>"
+                    txt+="<author>Nguyen Nhat Anh</author>"
+                    txt+="<year>2006</year>"
+                txt+="</book>"
+        </script>
+    </head>
+    <body>
+        <div id="div_xml_data" style="height :150px;overflow-y: scroll;">
+
+        </div> 
+        <table>
+            <thead>
+                <th>
+                    <td></td>
+                </th>
+            </thead>
+        </table>
+        <script type="text/javascript">
+            div_xml_data.innerText=txt
+            var parser = new DOMParser(); 
+            var xmlDoc = parser.parseFromString(txt,"text/xml"); 
+            var books=xmlDoc.getElementsByTagName("book");
+            alert(books.length)
+            for (i=0;i<books.length;i++)
+            {
+                book=books[i]
+                title=book.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+                author=book.getElementsByTagName("author")[0].childNodes[0].nodeValue;
+                year=book.getElementsByTagName("year")[0].childNodes[0].nodeValue;
+                tr=document.createElement("tr")
+                td_title=document.createElement("td")
+                td_title.innerText=title
+                td_author=document.createElement("td")
+                td_author.innerText=title
+                td_year=document.createElement("td")
+                td_year.innerText=title
+                tr.appendChild(td_title)
+                tr.appendChild(td_author)
+                tr.appendChild(td_year)
+                book_tbody.appendChild(tr)
+            }
+        </script>
+    </body>
+</html>

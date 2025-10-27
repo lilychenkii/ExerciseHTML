@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <title>Tiêu đề trang</title>
+        <script type="text/javascript">
+            var accounts=[
+                {'username':'admin',
+                'password':'123'
+                },
+                {'username':'reporter',
+                'password':'456'
+                }
+            ]
+        </script>
+    </head>
+    <body>
+        <form name="my_form">
+            <fieldset>
+                <legend>Login Information:</legend>
+                <table border="1">
+                    <tr>
+                        <td rowspan="7">
+                            <img src="../learn_dom/images/ic_admin.png"/> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>User Name:</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="username" id="username"/></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                    </tr>
+                    <tr>
+                        <td><input type="password" name="password" id="password"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="save_info" id="save_info"/>
+                            <label for="save_info">Save login information</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" onclick="process_login()">Login</button>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+        <script type="text/javascript">
+            function process_login()
+            {
+                login_info=null
+                for(i=0;i<accounts.length;i++)
+                {
+                    ac=accounts[i]
+                    if(ac.username==my_form.username.value && ac.password==my_form.password.value)
+                    {
+                        login_info=ac
+                        break
+                    }
+                }
+                if(login_info==null)
+                {
+                    alert('Login failed, please contact to Help Desk')
+                }
+                else
+                {
+                    jsonString=JSON.stringify(login_info)
+                    localStorage.setItem('login_info',jsonString)
+                    localStorage.setItem('login_info_saved',my_form.save_info.checked)
+                    if(login_info.username=='admin')
+                    {
+                        window.open('dom3.html','_self')
+                    }
+                    else
+                    {
+                        window.open('dom2.html','_self')
+                    }
+                }
+            }
+        </script>
+        <script type="text/javascript">
+            function load_login_info()
+            {
+                jsonString=localStorage.getItem('login_info')
+                ac=JSON.parse(jsonString)
+                saved=localStorage.getItem('login_info_saved')
+                if (saved=='true')
+                {
+                    my_form.username.value=ac.username
+                    my_form.password.value=ac.password
+                    my_form.save_info.checked=true
+                }
+            }
+        </script>
+    </body>
+</html>

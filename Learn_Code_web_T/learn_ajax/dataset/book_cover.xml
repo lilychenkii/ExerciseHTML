@@ -1,0 +1,21 @@
+<bookstore>
+  <book>
+    <title>Everyday Italian</title>
+    <author>Glada De Laurent</author>
+    <year>2005</year>
+    <cover>Book1.png</cover>
+  </book>
+  <book>
+    <title>Mot bua no</title>
+    <author>Nam Cao</author>
+    <year>1945</year>
+    <cover>Book2.png</cover>
+
+  </book>
+  <book>
+    <title>Doi thua</title>
+    <author>Nam Cao</author>
+    <year>1943</year>
+    <cover>Book3.png</cover>
+  </book>
+</bookstore>
